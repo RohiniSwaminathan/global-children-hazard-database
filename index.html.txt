@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNICEF's Global Children Hazard Database</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to ensure Inter font is used and smooth transitions */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light gray background */
+        }
+        .tab-button.active {
+            background-color: #3b82f6; /* Blue-500 for active main tab */
+            color: white;
+            border-bottom: 2px solid #2563eb; /* Darker blue line */
+        }
+        .sub-tab-button.active {
+            background-color: #bfdbfe; /* Blue-200 for active sub-tab */
+            color: #1e40af; /* Darker blue text */
+        }
+        .tab-content, .sub-tab-content {
+            display: none;
+        }
+        .tab-content.active, .sub-tab-content.active {
+            display: block;
+        }
+        .content-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .content-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+    <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-xl p-6 md:p-8">
+        <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-gray-800">Global Children Hazard Database</h1>
+
+        <!-- Main Tabs Navigation -->
+        <div class="flex flex-col sm:flex-row justify-center mb-6 border-b border-gray-200">
+            <button class="tab-button flex-1 py-3 px-4 text-lg font-medium text-center text-gray-700 hover:bg-blue-100 focus:outline-none transition-colors duration-200 rounded-t-lg" data-tab="hazard">Hazard</button>
+            <button class="tab-button flex-1 py-3 px-4 text-lg font-medium text-center text-gray-700 hover:bg-blue-100 focus:outline-none transition-colors duration-200 rounded-t-lg" data-tab="exposure">Exposure</button>
+            <button class="tab-button flex-1 py-3 px-4 text-lg font-medium text-center text-gray-700 hover:bg-blue-100 focus:outline-none transition-colors duration-200 rounded-t-lg" data-tab="vulnerability">Vulnerability</button>
+            <button class="tab-button flex-1 py-3 px-4 text-lg font-medium text-center text-gray-700 hover:bg-blue-100 focus:outline-none transition-colors duration-200 rounded-t-lg" data-tab="risk">Risk</button>
+            <button class="tab-button flex-1 py-3 px-4 text-lg font-medium text-center text-gray-700 hover:bg-blue-100 focus:outline-none transition-colors duration-200 rounded-t-lg" data-tab="acknowledgement">Acknowledgement</button>
+        </div>
+
+        <!-- Main Tab Content Areas -->
+        <div id="hazard-content" class="tab-content">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Children’s Exposure to Hazards</h2>
+            <p class="text-gray-700 mb-6">In CCRI 2025, climate and climate-sensitive hazards refer to those hazards that are directly or indirectly influenced by Earth’s climate system. Understanding climate and climate-sensitive hazards are core to risk analysis, emergency preparedness and planning for effective mitigation and adaptation. Pillar 1 combines children’s exposure to multiple climate and climate-sensitive hazards where open, global data was available. Climate hazard refers to natural events that are pre-dominantly hydro-meteorological in nature such as floods, tropical storms, heatwaves, wildfires and droughts. These hazards can be exacerbated by climate change, leading to increased frequency, intensity, and unpredictability. Climate sensitive hazard refers to hazards such as air pollution and vector borne diseases that are sensitive to changes in climate patterns, such as temperature and precipitation, which can affect the distribution and intensity of these risks.</p>
+
+            <!-- Sub-tabs for Hazard -->
+            <div class="flex flex-wrap sm:flex-row mb-4 bg-gray-100 rounded-lg p-2">
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="hazard" data-sub-tab="hazard-floods">Floods</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="hazard" data-sub-tab="hazard-drought">Drought</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="hazard" data-sub-tab="hazard-tropical-storm">Tropical Storm</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="hazard" data-sub-tab="hazard-heat">Heatwaves</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="hazard" data-sub-tab="hazard-fire">Fires</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="hazard" data-sub-tab="hazard-sand-dust">Sand and Dust Storm</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="hazard" data-sub-tab="hazard-vector-borne">Vector borne diseases</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="hazard" data-sub-tab="hazard-air-pollution">Air Pollution</button>
+            </div>
+            <!-- Sub-tab content for Hazard -->
+            <div id="hazard-floods-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Floods</h3>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Relevance:</h4>
+                    <p class="text-gray-700">Floods are a critical concern in climate change discussions due to their widespread impact on human and natural systems. They exacerbate existing vulnerabilities, particularly in communities already facing socioeconomic challenges. Children are especially vulnerable to the impacts of floods. Floods can disrupt their access to clean water, sanitation, and healthcare, leading to increased risks of diseases. Additionally, floods can cause significant psychological stress and trauma, affecting children's mental health and development (IPCC, 2022).</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Fluvial Flood Definition:</h4>
+                    <p class="text-gray-700">A fluvial or riverine flood is a rise, usually brief, in the water level of a stream or water body to a peak from which the water level recedes at a slower rate (WMO, 2012). The primary cause is an extended precipitation event that occurs at, or upstream from, the affected area and can also occur when traditional flood-control structures are overtopped.</p>
+                    <h4 class="text-lg font-semibold text-blue-700 mt-3">Coastal Flood Definition:</h4>
+                    <p class="text-gray-700">Coastal flooding is most frequently the result of storm surges and high winds coinciding with high tides (WMO, 2011).</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Source (Fluvial):</h4>
+                    <p class="text-gray-700">JRC’s gridded Global Flood Hazard model (Baugh, 2024) at 100-year return period and 90m spatial resolution. Water depth above 1cm is considered.</p>
+                    <h4 class="text-lg font-semibold text-blue-700 mt-3">Data Source (Coastal):</h4>
+                    <p class="text-gray-700">JRC’s gridded Global Coastal Flood Hazard model at 100-year return period and 90m spatial resolution (binary layer).</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Processing:</h4>
+                    <p class="text-gray-700">Children’s exposure was calculated by simple overlay of the flood hazard and the global child population layer. Results were summarized to administrative boundaries as absolute and relative values using zonal statistics.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Indicators:</h4>
+                    <ul class="list-disc ml-5 text-gray-700">
+                        <li>Absolute number of children exposed to riverine floods</li>
+                        <li>Relative number of children exposed to riverine floods</li>
+                        <li>Absolute number of children exposed to coastal floods</li>
+                        <li>Relative number of children exposed to coastal floods</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Limitations:</h4>
+                    <p class="text-gray-700">While major riverine floods have been modelled at higher resolution, data might not cover smaller rivers. Pluvial flood data is not used in the index.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Floods+Hazard+Image" alt="Floods Hazard Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="hazard-drought-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Drought</h3>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Relevance:</h4>
+                    <p class="text-gray-700">Drought has always been a part of the natural variability of Earth’s climate. Climate change increasingly puts pressure on food production and access, especially in vulnerable regions, and undermines food security and nutrition. The increase in the frequency, intensity, and duration of droughts will increase risks to food security. Children are especially impacted by various drought risks. The lack of water can compromise their access to clean drinking water and sanitation, increasing the risk of diseases. Additionally, droughts can lead to food shortages, impacting children's nutrition and overall health. The psychological stress and trauma associated with drought conditions can also affect children's mental health and development (IPCC, 2022).</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Agricultural Drought Definition:</h4>
+                    <p class="text-gray-700">Agricultural drought occurs when there is insufficient soil moisture to meet the needs of a particular crop at a particular time (FAO, 2025).</p>
+                    <h4 class="text-lg font-semibold text-blue-700 mt-3">Meteorological Drought Definition:</h4>
+                    <p class="text-gray-700">Meteorological drought occurs when dry weather patterns dominate an area, defined by the degree of dryness and the duration of the dry period (WMO, 2021).</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Source (Agricultural):</h4>
+                    <p class="text-gray-700">The Agricultural Stress Index (ASI) facilitates the early identification of cropped land with a high likelihood of water stress (drought). Average Annual ASI from 1984 - 2023 used as proxy.</p>
+                    <h4 class="text-lg font-semibold text-blue-700 mt-3">Data Source (Meteorological):</h4>
+                    <p class="text-gray-700">The Standardized Precipitation Index (SPI) from the European Copernicus Global Drought Observatory at 5km spatial resolution.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Processing (Agricultural):</h4>
+                    <p class="text-gray-700">Children’s exposure to agricultural drought was calculated by simple overlay of areas where the long term average annual ASI with over 50% cropland is affected and the global child population layer.</p>
+                    <h4 class="text-lg font-semibold text-blue-700 mt-3">Data Processing (Meteorological):</h4>
+                    <p class="text-gray-700">Children’s exposure to meteorological drought was calculated by simple overlay of areas where SPI is less than -1 and the global child population layer.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Indicators:</h4>
+                    <ul class="list-disc ml-5 text-gray-700">
+                        <li>Absolute number of children exposed to agricultural droughts</li>
+                        <li>Relative number of children exposed to agricultural droughts</li>
+                        <li>Absolute number of children exposed to meteorological droughts</li>
+                        <li>Relative number of children exposed to meteorological droughts</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Limitations:</h4>
+                    <p class="text-gray-700">Drought impact can be felt beyond the immediate location of agricultural drought. CCRI 2025 assumes direct effect for children living close to the actual location and doesn't account for those depending on crop production as primary food source in distant areas.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Drought+Hazard+Image" alt="Drought Hazard Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="hazard-tropical-storm-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Tropical Storm</h3>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Definition:</h4>
+                    <p class="text-gray-700">A tropical storm is a type of storm system characterized by a low-pressure center, a closed low-level atmospheric circulation, strong winds, and a spiral arrangement of thunderstorms that produce heavy rain (WMO, 2021). Wind speed greater than 63 km/hr is considered a named tropical storm.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Relevance:</h4>
+                    <p class="text-gray-700">Tropical storms can cause significant damage through high winds, heavy rainfall, and storm surges. Climate change is increasing their intensity and frequency. Children are particularly vulnerable; these events can disrupt access to clean water, food, and healthcare, increasing risks of malnutrition and diseases, and can lead to psychological trauma.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Source:</h4>
+                    <p class="text-gray-700">Tropical cyclone wind data derived from UNEP GIRI, indicating mean wind velocity for a 100-year return period at ~11.1 kilometers resolution (CDRI, 2023).</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Processing:</h4>
+                    <p class="text-gray-700">Children’s exposure was calculated by simple overlay of areas where wind speed is over 63 km/hr and the global child population layer. Results were summarized to administrative boundaries as absolute and relative values.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Indicators:</h4>
+                    <ul class="list-disc ml-5 text-gray-700">
+                        <li>Absolute number of children exposed to tropical storms</li>
+                        <li>Relative number of children exposed to tropical storms</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Limitations:</h4>
+                    <p class="text-gray-700">No specific limitations noted in the document for this section.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Tropical+Storm+Hazard+Image" alt="Tropical Storm Hazard Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="hazard-heat-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Heatwaves</h3>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Definition:</h4>
+                    <p class="text-gray-700">A heatwave is defined as any period of 3-days or more when the maximum temperature each day is in the top 10% of the local 15-day average. Four dimensions are considered: frequency, duration, severity, and extremely high temperatures (exceeding 35 degrees Celsius).</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Relevance:</h4>
+                    <p class="text-gray-700">Climate change is raising global temperatures and causing historic heat waves with higher frequencies, duration, and severity. Children are more vulnerable to the short- and long-term effects, especially from heat stress, which can negatively affect health and well-being. School closures due to heatwaves are becoming increasingly common, impacting children’s education.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Source:</h4>
+                    <p class="text-gray-700">Temperature input is calculated using daily aggregate temperature data from the ERA5 reanalysis (Muñoz, 2019). Last ten-year average is considered for CCRI 2025.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Processing:</h4>
+                    <p class="text-gray-700">Children’s exposure to individual dimensions were calculated by simple overlay of the areas where the individual dimension of heatwave is significant and the global child population layer. Results were summarized to administrative boundaries as absolute and relative values.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Indicators:</h4>
+                    <ul class="list-disc ml-5 text-gray-700">
+                        <li>Absolute/Relative number of children exposed to heatwave frequency</li>
+                        <li>Absolute/Relative number of children exposed to heatwave duration</li>
+                        <li>Absolute/Relative number of children exposed to heatwave severity</li>
+                        <li>Absolute/Relative number of children exposed to extreme temperature</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Limitations:</h4>
+                    <p class="text-gray-700">SIDS countries integration details are pending.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Heatwaves+Hazard+Image" alt="Heatwaves Hazard Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="hazard-fire-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Fires</h3>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Definition:</h4>
+                    <p class="text-gray-700">Wildfires are uncontrolled burns of vegetation, caused by human activity or natural causes (UNDRR, 2020). They affect fluxes of energy and water to the atmosphere.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Relevance:</h4>
+                    <p class="text-gray-700">Fires lead to loss of biodiversity, property destruction, and air pollution, and contribute to climate change by releasing greenhouse gases. Climate change increases fire frequency and intensity. Children are particularly vulnerable to smoke and air pollutants, which cause respiratory problems and psychological trauma, also impacting education.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Source:</h4>
+                    <p class="text-gray-700">NASA’s Fire Information for Resource Management System (FIRMS) used as a proxy for fire hazard, specifically average fire frequency from 2001-2023 (MODIS Fire and Thermal Anomalies product).</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Processing:</h4>
+                    <p class="text-gray-700">Children’s exposure to fires was calculated by simple overlay of areas where fire frequency is above a certain threshold and the global child population layer. Results were summarized to administrative boundaries as absolute and relative values.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Indicators:</h4>
+                    <ul class="list-disc ml-5 text-gray-700">
+                        <li>Absolute number of children exposed to fires</li>
+                        <li>Relative number of children exposed to fires</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Limitations:</h4>
+                    <p class="text-gray-700">Fire frequency alone is a limited indicator as it does not show areas potentially affected by future fires. It is a proxy due to lack of high-resolution global hazard data for Fire Weather Index (FWI).</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Fires+Hazard+Image" alt="Fires Hazard Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="hazard-sand-dust-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Sand and Dust Storms</h3>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Definition:</h4>
+                    <p class="text-gray-700">Sand and dust storms (SDS) are caused by intense winds over arid soil, picking up large amounts of material into the atmosphere. Human activities and climate change exacerbate their occurrence.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Relevance:</h4>
+                    <p class="text-gray-700">Land degradation contributes to increased SDS. Exposure to dust leads to respiratory problems, allergies, and other health issues. Disruption of daily activities and schooling due to poor air quality affects children's education and well-being.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Source:</h4>
+                    <p class="text-gray-700">UNCCD’s Sand and Dust Storm susceptibility layer at 1km resolution (UNCCD, 2024).</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Processing:</h4>
+                    <p class="text-gray-700">Children’s exposure was calculated by simple overlay of areas with SDS susceptibility and the global child population layer. Results were summarized to administrative boundaries as absolute and relative values.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Indicators:</h4>
+                    <ul class="list-disc ml-5 text-gray-700">
+                        <li>Absolute number of children exposed to Sand and Dust Storms</li>
+                        <li>Relative number of children exposed to Sand and Dust Storms</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Limitations:</h4>
+                    <p class="text-gray-700">SDS susceptibility layer includes areas of original source but not where wind could transport particles, potentially under-estimating overall global exposure. Limited precision in identifying lower intensity sources due to data lack and high uncertainty with soil-related data.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Sand+Dust+Storm+Hazard+Image" alt="Sand and Dust Storm Hazard Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="hazard-vector-borne-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Vector borne diseases (Malaria)</h3>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Definition:</h4>
+                    <p class="text-gray-700">Vector borne diseases are human illnesses caused by parasites, viruses, and bacteria transmitted by vectors. Malaria is a life-threatening disease caused by parasites transmitted through bites of infected female Anopheles mosquitoes (WHO, 2021).</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Relevance:</h4>
+                    <p class="text-gray-700">Climate change alters vector distribution and abundance, leading to changes in disease incidence and geographic range. Higher temperatures and land use changes make more areas suitable for transmission. Children are particularly susceptible to severe health problems from vector-borne diseases like malaria, which can cause high fever, anemia, neurological complications, and mortality, also impacting nutrition and education.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Source:</h4>
+                    <p class="text-gray-700">Gridded long-term estimates from Malaria Atlas Project (MAP, 2025). Gridded average number of newly diagnosed Plasmodium falciparum and Plasmodium vivax cases per 1,000 population from 2012-2022 used as proxy.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Processing:</h4>
+                    <p class="text-gray-700">Children living in areas with more than 1 case are estimated as exposed to Malaria (individually for each Plasmodium type) and overlaid with global children population layer. Results summarized to administrative boundaries as absolute and relative values.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Indicators:</h4>
+                    <ul class="list-disc ml-5 text-gray-700">
+                        <li>Absolute/Relative number of children exposed to Malaria (Plasmodium Falciparum)</li>
+                        <li>Absolute/Relative number of children exposed to Malaria (Plasmodium Vivax)</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Limitations:</h4>
+                    <p class="text-gray-700">Only includes estimates based on reported cases, not areas susceptible to Malaria based on climate indicators, due to data availability. Combination of long-term cases and susceptibility is highly recommended.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Vector+Borne+Diseases+Hazard+Image" alt="Vector Borne Diseases Hazard Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="hazard-air-pollution-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Air Pollution (PM2.5)</h3>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Definition:</h4>
+                    <p class="text-gray-700">Air pollution refers to the presence of substances in the atmosphere harmful to human health and environment. Fine particulate matter (PM2.5) refers to airborne particles measuring less than 2.5 micrometers in diameter, emitted from various human and natural sources (Health Effects Institute, 2024).</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Relevance:</h4>
+                    <p class="text-gray-700">Climate change and air pollution are closely linked; activities producing greenhouse gases also emit air pollutants. Air pollution is the biggest environmental health risk factor for children. Exposure can lead to respiratory problems, asthma, and other health issues, affecting development and cognitive function. It was the second leading risk factor for death among children under five in 2021, after malnutrition.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Source:</h4>
+                    <p class="text-gray-700">Data from the Atmospheric Composition Analysis Group (ACAG) for global PM2.5 concentrations (Shen et al, 2024). A threshold of 5 μg/m3 (WHO, 2021) and a ten-year average (2012–2022) are considered.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Processing:</h4>
+                    <p class="text-gray-700">Children’s exposure was calculated by simple overlay of areas where the ten-year average PM2.5 was greater than 5 μg/m3 and the global child population layer. Results summarized to administrative boundaries as absolute and relative values.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Indicators:</h4>
+                    <ul class="list-disc ml-5 text-gray-700">
+                        <li>Absolute number of children exposed to air pollution</li>
+                        <li>Relative number of children exposed to air pollution</li>
+                    </ul>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Limitations:</h4>
+                    <p class="text-gray-700">Limited on-the-ground air quality monitoring stations in many regions, especially low- and middle-income countries, can affect results. Several other air pollutants are not included due to lack of reliably modelled long-term global data.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Air+Pollution+Hazard+Image" alt="Air Pollution Hazard Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+        </div>
+
+        <div id="exposure-content" class="tab-content">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Exposure Analysis</h2>
+            <p class="text-gray-700 mb-6">Exposure refers to the presence of children that could be adversely affected by hazards. WorldPop’s global gridded children population estimate (Under 18) at 100m spatial resolution was used for all exposure analysis in CCRI 2025.</p>
+            <!-- Sub-tabs for Exposure -->
+            <div class="flex flex-col sm:flex-row mb-4 bg-gray-100 rounded-lg p-2">
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md" data-main-tab="exposure" data-sub-tab="exposure-children">Children Exposure</button>
+            </div>
+            <!-- Sub-tab content for Exposure -->
+            <div id="exposure-children-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Children Exposure</h3>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Definition:</h4>
+                    <p class="text-gray-700">This section focuses on the presence of children who could be adversely affected by climate and climate-sensitive hazards. It quantifies the number of children located within areas identified as being at risk from various hazards.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Data Source:</h4>
+                    <p class="text-gray-700">WorldPop’s global gridded children population estimate (Under 18) at 100m spatial resolution was consistently used for all exposure analysis in CCRI 2025.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Methodology:</h4>
+                    <p class="text-gray-700">Children's exposure to each hazard was calculated by a simple overlay of the specific hazard layer (e.g., flood, drought, heatwave areas) and the global child population layer. The results were then summarized to different administrative boundaries (Member States and territories) as absolute and relative values using zonal statistics.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Key Considerations:</h4>
+                    <ul class="list-disc ml-5 text-gray-700">
+                        <li>Probabilistic models were given higher priority to define hazards.</li>
+                        <li>A 100-year return period is considered as default.</li>
+                        <li>Where probabilistic models are lacking, long-term observation data has been chosen as a proxy.</li>
+                        <li>Estimates include all children who could potentially be exposed and do not account for exposure in any particular year.</li>
+                    </ul>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Children+Exposure+Image" alt="Children Exposure Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+        </div>
+
+        <div id="vulnerability-content" class="tab-content">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Child Vulnerability</h2>
+            <p class="text-gray-700 mb-6">Children face unique vulnerabilities that make them particularly susceptible to climate and climate-sensitive hazards. Given their unique metabolism, physiology, and developmental needs, children are more vulnerable to extreme events and societal changes than adults. Additionally, children are less able to protect themselves from harm and are more dependent on adults for their safety and care. Addressing these vulnerabilities is crucial for creating resilient and supportive environments that promote children's growth and development. CCRI 2025 includes seven child-specific vulnerability components with 16 indicators.</p>
+
+            <!-- Sub-tabs for Vulnerability -->
+            <div class="flex flex-wrap sm:flex-row mb-4 bg-gray-100 rounded-lg p-2">
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="vulnerability" data-sub-tab="vulnerability-health">Health</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="vulnerability" data-sub-tab="vulnerability-nutrition">Nutrition</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="vulnerability" data-sub-tab="vulnerability-wash">WASH</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="vulnerability" data-sub-tab="vulnerability-education">Education</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="vulnerability" data-sub-tab="vulnerability-protection">Protection</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="vulnerability" data-sub-tab="vulnerability-poverty">Poverty</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md min-w-[150px]" data-main-tab="vulnerability" data-sub-tab="vulnerability-survival">Survival</button>
+            </div>
+            <!-- Sub-tab content for Vulnerability -->
+            <div id="vulnerability-health-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Health</h3>
+                <p class="text-gray-700 mb-4">Health refers to the overall well-being and access to essential health services, including immunization coverage, maternal health care, and the performance of health systems, which are crucial for children's survival and development.</p>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Child Health (DTP Coverage):</h4>
+                    <p class="text-gray-700">Immunization is one of the most cost-effective public health interventions. DTP (diphtheria – tetanus – pertussis) coverage is often used as a marker of how well countries are providing routine immunization services to children, which in turn are a good proxy for child health. Access to life-saving vaccines to combat diseases is not universal and varies across regions and countries.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicators:</strong> Percentage of children with DTP1 immunization coverage; Percentage of children with DTP3 immunization coverage.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Maternal Health (Skilled Birth Attendance):</h4>
+                    <p class="text-gray-700">Despite recent progress, millions of births still occur without any assistance from a skilled attendant each year, which is a good proxy for maternal health in a country.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Percentage of births with skilled attendance coverage.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Health System Performance (Access to Electricity):</h4>
+                    <p class="text-gray-700">Electrification is a proxy of health system performance, strongly correlating to various other covariates. Access to basic utilities like electricity can enhance the operation of healthcare facilities and services.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Percentage of population with access to electricity.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Health+Vulnerability+Image" alt="Health Vulnerability Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="vulnerability-nutrition-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Nutrition</h3>
+                <p class="text-gray-700 mb-4">Nutrition assesses the extent to which children suffer from undernutrition, which can severely impact their physical and cognitive development, and access to a diverse and nutritious diet, crucial for preventing long-term health issues.</p>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Stunting:</h4>
+                    <p class="text-gray-700">Stunting is the result of chronic or recurrent undernutrition in-utero and early childhood. Children suffering from stunting may never reach their full possible height nor their full cognitive potential. Stunted children not only earn less as adults as a result of less schooling and learning difficulties when in school, but they are also more likely to be at risk of overweight and obesity than children of normal height.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Percentage of children under five with a height for age z-score less than minus two standard deviations.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Child Food Poverty:</h4>
+                    <p class="text-gray-700">Child Food Poverty is children’s inability to access and consume a nutritious and diverse diet in early childhood. Child food poverty harms all children, but it is particularly damaging in early childhood when insufficient dietary intake of essential nutrients can cause the greatest harm to child survival, physical growth, and cognitive development, trapping children and their families in a cycle of poverty and deprivation.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Percentage of children living in severe / moderate child food poverty.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Nutrition+Vulnerability+Image" alt="Nutrition Vulnerability Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="vulnerability-wash-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">WASH (Water, Sanitation, and Hygiene)</h3>
+                <p class="text-gray-700 mb-4">Securing access to safe drinking water, sanitation, and hygiene reduces illness and death, especially among children.</p>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Water:</h4>
+                    <p class="text-gray-700">At least basic drinking water refers to water from an improved source, provided collection time is not more than 30 minutes for a round trip, including queuing.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Percentage of population with at least basic drinking water access.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Sanitation:</h4>
+                    <p class="text-gray-700">At least basic sanitation refers to use of improved facilities that are not shared with other households.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Percentage of population with at least basic sanitation access.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Hygiene:</h4>
+                    <p class="text-gray-700">Basic hygiene refers to availability of a handwashing facility with soap and water at home.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Percentage of households with basic hygiene facilities.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=WASH+Vulnerability+Image" alt="WASH Vulnerability Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="vulnerability-education-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Education</h3>
+                <p class="text-gray-700 mb-4">Education focuses on children's access to and completion of schooling, particularly secondary education, and the extent of learning poverty, all of which are critical for their development and future participation in society.</p>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Lower Secondary Out-of-School:</h4>
+                    <p class="text-gray-700">The education and training that children receive in secondary school equip them with skills that are necessary to fully participate in society. Challenges remain in reducing regional disparities and inequalities among secondary school-age students.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Percentage of children out of school in lower secondary education.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Lower Secondary Completion Rate:</h4>
+                    <p class="text-gray-700">This indicator measures the proportion of children who successfully complete their lower secondary education, reflecting the effectiveness of educational systems.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Completion rate of children in lower secondary education.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Learning Poverty:</h4>
+                    <p class="text-gray-700">The learning poverty indicator, launched by the World Bank and UNESCO Institute for Statistics in 2019, helps understand the global learning crisis. High rates of learning poverty are an early signal that education systems are failing to ensure that children develop critical foundational skills.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Percentage of children (by age/grade) unable to read and understand a simple text by late primary age.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Education+Vulnerability+Image" alt="Education Vulnerability Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="vulnerability-protection-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Protection</h3>
+                <p class="text-gray-700 mb-4">Protection addresses the prevalence of harmful practices against children, such as child labor and child marriage, which violate their fundamental rights and jeopardize their development, safety, and well-being.</p>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Child Labor:</h4>
+                    <p class="text-gray-700">Children are classified as child laborers when they are either too young to work or are involved in hazardous activities that may compromise their physical, mental, social or educational development.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Percentage of children 5–17 years old involved in child labour.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Child Marriage:</h4>
+                    <p class="text-gray-700">Marriage before the age of 18 is a fundamental violation of human rights. Many factors interact to place a child at risk of marriage, including poverty, the perception that marriage will provide ‘protection’, family honor, social norms, customary or religious laws that condone the practice, an inadequate legislative framework and the state of a country’s civil registration system.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Total number of girls and women of all ages who were first married or in union before age 18.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Protection+Vulnerability+Image" alt="Protection Vulnerability Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="vulnerability-poverty-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Poverty</h3>
+                <p class="text-gray-700 mb-4">Poverty examines the multifaceted deprivations children experience, including lack of access to basic necessities and social protection, which can severely limit their opportunities and perpetuate a cycle of disadvantage.</p>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Multi-dimensional Poverty:</h4>
+                    <p class="text-gray-700">Very often children experience poverty as the lack of shelter, education, nutrition, water or health services. The lack of these basic needs often results in deficits that cannot easily be overcome later in life. Even when not clearly deprived, having poorer opportunities than their peers in any of the above can limit future opportunities.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Percentage of children suffering at least one deprivation across multiple dimensions.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Under Five Covered by Social Protection:</h4>
+                    <p class="text-gray-700">This indicator assesses the extent to which children under five years of age are beneficiaries of social protection programs, which can provide crucial support for their well-being and development.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Percentage of children under five covered by social protection.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Poverty+Vulnerability+Image" alt="Poverty Vulnerability Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="vulnerability-survival-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Child Survival</h3>
+                <p class="text-gray-700 mb-4">Child Survival focuses on the most critical outcome for children: their ability to survive past early childhood, measured by the under-five mortality rate, reflecting the overall health and well-being of a population's youngest members.</p>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Under Five Mortality:</h4>
+                    <p class="text-gray-700">The under-five mortality rate refers to the probability a newborn would die before reaching exactly 5 years of age, expressed per 1,000 live births.</p>
+                    <p class="text-gray-700 mt-2"><strong>Indicator:</strong> Mortality rate under five per 1000 live births.</p>
+                    <p class="text-gray-700"><strong>Source:</strong> UNICEF global databases, 2024, based on DHS, MICS and other national surveys.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Survival+Vulnerability+Image" alt="Survival Vulnerability Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+        </div>
+
+        <div id="risk-content" class="tab-content">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Risk Assessment</h2>
+            <p class="text-gray-700 mb-6">Risk refers to the potential of adverse consequences, resulting from dynamic interactions between climate-related hazards with the exposure and vulnerability of children or associated assets and systems to the hazards.</p>
+            <!-- Sub-tabs for Risk -->
+            <div class="flex flex-col sm:flex-row mb-4 bg-gray-100 rounded-lg p-2">
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md" data-main-tab="risk" data-sub-tab="risk-overview">Risk Overview</button>
+                <button class="sub-tab-button flex-1 py-2 px-3 text-md font-medium text-center text-gray-600 hover:bg-gray-200 focus:outline-none transition-colors duration-200 rounded-md" data-main-tab="risk" data-sub-tab="risk-mitigation">Mitigation Strategies</button>
+            </div>
+            <!-- Sub-tab content for Risk -->
+            <div id="risk-overview-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Risk Overview Details</h3>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">CCRI Framework:</h4>
+                    <p class="text-gray-700">The Children Climate Risk Index (CCRI) is a composite index that aims to rank countries where vulnerable children are also exposed to a wide range of climate and environmental hazards. Recognizing that children are disproportionately affected, CCRI provides a comprehensive assessment of how climate and environmental hazards intersect with children’s existing vulnerabilities. CCRI 2025 adopted the hazard x exposure x vulnerability as the foundational risk framework (IPCC, 2020).</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Composite Index:</h4>
+                    <p class="text-gray-700">The CCRI composite index is designed to encompass a comprehensive list of children’s exposure to various hazards and vulnerabilities. It uses a 0-10 scale, where 10 represents the highest multi-hazard risk. The methodology involves thresholds, normalization (to a 0-10 scale), and a blended aggregation method (geometric and arithmetic mean) to combine Pillar 1 (Exposure to Hazards) and Pillar 2 (Child Vulnerability) indicators.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Pixel-based Analysis:</h4>
+                    <p class="text-gray-700">Pixel-level analysis is performed to capture fine-grained variations in climate risks within a country, enabling the identification of climate risk hotspots that national averages may overlook. This approach allows for a more precise understanding of climate risks at both local and national levels, with flexibility to aggregate data to administrative levels 0, 1, or 2 based on the specific use case.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Risk+Overview+Image" alt="Risk Overview Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+            <div id="risk-mitigation-content" class="sub-tab-content bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-medium mb-3 text-blue-800">Mitigation Strategies Details</h3>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Policy and Research Implications:</h4>
+                    <p class="text-gray-700">This data-driven tool is aimed to allow UNICEF country offices, policy makers, humanitarian organizations, and other relevant stakeholders to advocate, prioritize action and allocate resources effectively to protect the most vulnerable children, building a climate resilient future for all.</p>
+                </div>
+                <div class="content-section">
+                    <h4 class="text-lg font-semibold text-blue-700">Proposed Actions:</h4>
+                    <p class="text-gray-700">Proposed actions and policies to reduce risks, including structural and non-structural measures, are crucial for adapting to the rapidly evolving climate crisis. Understanding complex interactions between hazards, exposure, and vulnerability is key to better preparation.</p>
+                </div>
+                <img src="https://placehold.co/600x200/B0D9FF/000000?text=Mitigation+Strategies+Image" alt="Mitigation Strategies Placeholder" class="mt-4 rounded-md shadow-sm">
+            </div>
+        </div>
+
+        <div id="acknowledgement-content" class="tab-content">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Acknowledgement</h2>
+            <p class="text-gray-700 mb-6">This section acknowledges the contributions of various individuals, organizations, and data sources that made the Global Children Hazard Database possible. We express our gratitude to all experts, researchers, and partners who contributed their knowledge, data, and insights to this initiative. Their dedication is instrumental in advancing our understanding and efforts to protect the most vulnerable children from climate and environmental hazards.</p>
+            <div class="content-section">
+                <h4 class="text-lg font-semibold text-blue-700">Key Contributors:</h4>
+                <p class="text-gray-700">We extend our thanks to the teams involved in data collection, processing, and analysis, as well as the technical reviewers and advisors who provided invaluable feedback and guidance throughout the development of the CCRI 2025.</p>
+            </div>
+            <div class="content-section">
+                <h4 class="text-lg font-semibold text-blue-700">Data Partnerships:</h4>
+                <p class="text-gray-700">This project relies on open-source global datasets. We acknowledge the efforts of organizations and initiatives that make such critical data publicly available, fostering collaborative research and informed decision-making.</p>
+            </div>
+            <div class="content-section">
+                <h4 class="text-lg font-semibold text-blue-700">Funding and Support:</h4>
+                <p class="text-gray-700">We are grateful for the support and resources provided by [mention specific organizations or funds if applicable] that enabled the development and dissemination of this database.</p>
+            </div>
+            <img src="https://placehold.co/600x200/B0D9FF/000000?text=Acknowledgement+Image" alt="Acknowledgement Placeholder" class="mt-4 rounded-md shadow-sm">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainTabButtons = document.querySelectorAll('.tab-button');
+            const mainTabContents = document.querySelectorAll('.tab-content');
+            const subTabButtons = document.querySelectorAll('.sub-tab-button');
+            const subTabContents = document.querySelectorAll('.sub-tab-content');
+
+            // Function to activate a main tab
+            function activateMainTab(tabName) {
+                // Deactivate all main tab buttons and content
+                mainTabButtons.forEach(button => button.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+
+                // Activate the selected main tab button and content
+                const selectedButton = document.querySelector(`.tab-button[data-tab="${tabName}"]`);
+                const selectedContent = document.getElementById(`${tabName}-content`);
+                if (selectedButton) selectedButton.classList.add('active');
+                if (selectedContent) selectedContent.classList.add('active');
+
+                // Activate the first sub-tab of the newly activated main tab, if it's not the acknowledgement tab
+                if (tabName !== 'acknowledgement') {
+                    const firstSubTabButton = selectedContent ? selectedContent.querySelector('.sub-tab-button') : null;
+                    if (firstSubTabButton) {
+                        activateSubTab(firstSubTabButton.dataset.mainTab, firstSubTabButton.dataset.subTab);
+                    } else {
+                        // If no sub-tabs, deactivate all sub-tab contents
+                        subTabContents.forEach(content => content.classList.remove('active'));
+                        subTabButtons.forEach(button => button.classList.remove('active'));
+                    }
+                } else {
+                    // If it's the acknowledgement tab, ensure no sub-tabs are active
+                    subTabContents.forEach(content => content.classList.remove('active'));
+                    subTabButtons.forEach(button => button.classList.remove('active'));
+                }
+            }
+
+            // Function to activate a sub-tab
+            function activateSubTab(mainTabName, subTabName) {
+                // Deactivate all sub-tab buttons and content within the active main tab
+                const currentMainTabContent = document.getElementById(`${mainTabName}-content`);
+                if (currentMainTabContent) {
+                    currentMainTabContent.querySelectorAll('.sub-tab-button').forEach(button => button.classList.remove('active'));
+                    currentMainTabContent.querySelectorAll('.sub-tab-content').forEach(content => content.classList.remove('active'));
+                }
+
+                // Activate the selected sub-tab button and content
+                const selectedSubButton = document.querySelector(`.sub-tab-button[data-sub-tab="${subTabName}"]`);
+                const selectedSubContent = document.getElementById(`${subTabName}-content`);
+                if (selectedSubButton) selectedSubButton.classList.add('active');
+                if (selectedSubContent) selectedSubContent.classList.add('active');
+            }
+
+            // Add event listeners for main tab buttons
+            mainTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabName = button.dataset.tab;
+                    activateMainTab(tabName);
+                });
+            });
+
+            // Add event listeners for sub-tab buttons
+            subTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const mainTabName = button.dataset.mainTab;
+                    const subTabName = button.dataset.subTab; // Corrected: Use data-sub-tab
+                    activateSubTab(mainTabName, subTabName);
+                });
+            });
+
+            // Activate the first main tab and its first sub-tab on page load
+            activateMainTab('hazard');
+        });
+    </script>
+</body>
+</html>
